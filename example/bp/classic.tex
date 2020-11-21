@@ -1,0 +1,13 @@
+\subsection{Classic bin-packing}
+
+In the classic bin-packing problem, each item is represented as a real number
+from the interval $(0, 1]$, and a set of items fit into a bin if their sum is at most 1.
+
+\begin{theorem}[\cite{johnson1974worst}]
+The number of bins used by the Next-Fit algorithm to pack items $I$ is at most
+$2\ceil{\opt(I)}$.
+\end{theorem}
+
+\begin{theorem}[\cite{johnson1974worst}]
+The First-Fit algorithm is 1.7-\asymAppx.
+\end{theorem}

@@ -1,0 +1,19 @@
+\subsection{2D geometric bin-packing}
+
+In the 2D geometric bin-packing problem, each item $i$ is a rectangle of width $w(i)$
+and height $h(i)$. The bin is a rectangle of width $W$ and height $H$.
+We have to compute an axis-parallel packing of the rectangles into the minimum number of bins.
+
+\begin{theorem}[\cite{coffman1980performance}]
+The Next-Fit-Decreasing-Height (NFDH) algorithm is 4-\asymAppx.
+\end{theorem}
+\begin{theorem}[\cite{caprara2008}]
+The $\hdh_k$ algorithm is $T_k$-\asymAppx{} for 2D geometric bin-packing,
+where $T_{\infty} := \lim_{k \to \infty} T_k \approx 1.6910$.
+\end{theorem}
+\begin{optional}
+\begin{theorem}[\cite{JansenP2013}]
+For any $\eps > 0$, there exists a $(1.5+\eps)$-\asymAppx{}
+algorithm for 2D geometric bin-packing.
+\end{theorem}
+\end{optional}
