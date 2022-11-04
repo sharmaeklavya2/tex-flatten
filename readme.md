@@ -18,7 +18,7 @@ and `% tex-flatten:ignore-end` is ignored.
 * Replaces all `\input` commands by their file contents
 (except the ones inside comments and ignored environments).
 
-* Optionally, using the `--bbl` command-line option,
+* Optionally, using the `--bbl-to-read` command-line option,
 one can replace BibTeX commands by the entire bibliography from the `.bbl` file.
 
 Run `python tex-flatten.py --help` to see the full command-line syntax.

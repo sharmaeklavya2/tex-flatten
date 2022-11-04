@@ -70,11 +70,14 @@ def recursive_read(fpath, ignore_envs, parts):
     parts.append(s[last_pos:])
 
 
-def replace_bib(s, bbl_path):
+def replace_bib(s, bbl_path, read_file):
     s = re.sub(r'\\bibliographystyle{[^}]+}', '', s)
-    with open(bbl_path) as fp:
-        bbl_content = fp.read()
-    return re.sub(r'\\bibliography{[^}]+}', (lambda match: bbl_content), s, count=1)
+    if read_file:
+        with open(bbl_path) as fp:
+            repl = fp.read()
+    else:
+        repl = r'\input{' + bbl_path + '}'
+    return re.sub(r'\\bibliography{[^}]+}', (lambda match: repl), s, count=1)
 
 
 def clean(s):
@@ -87,7 +90,11 @@ def main():
     parser.add_argument('-o', '--output', help='path to output file')
     parser.add_argument('--ignore', dest='ignore_envs', action='append',
         help='environments to ignore')
-    parser.add_argument('--bbl', help='path to bbl file')
+    bblGroup = parser.add_mutually_exclusive_group()
+    bblGroup.add_argument('--bbl-to-read',
+        help='path to bbl file. Read its contents and put in tex file.')
+    bblGroup.add_argument('--bbl-to-link',
+        help='path to bbl file. \\input it in tex file.')
     parser.add_argument('--no-clean', dest='clean', action='store_false', default=True,
         help='do not remove consecutive empty lines')
     args = parser.parse_args()
@@ -100,8 +107,9 @@ def main():
     recursive_read(args.ifpath, args.ignore_envs, parts)
     s = ''.join(parts)
 
-    if args.bbl:
-        s = replace_bib(s, args.bbl)
+    bbl_path = args.bbl_to_read or args.bbl_to_link
+    if bbl_path is not None:
+        s = replace_bib(s, bbl_path, args.bbl_to_read is not None)
     if args.clean:
         s = clean(s)
     if args.output is None:
