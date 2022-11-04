@@ -6,6 +6,8 @@ The script `tex-flatten.py` converts a multi-file project into a single TeX file
 
 ## Features
 
+* Removes comments (text after `%` in each line).
+
 * Allows removing content in certain environments.
 This is useful for removing conditional excludes,
 like those offered by the [`comment`](https://ctan.org/pkg/comment) package.
